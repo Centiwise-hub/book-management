@@ -3,42 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Management Platform</title>
+  <title>Book Management System</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f4f6f9;
       margin: 0;
       padding: 0;
-      background: #f4f4f9;
-      color: #333;
     }
+
     header {
-      background: #4a90e2;
+      background: #2c3e50;
       color: white;
-      padding: 1rem;
+      padding: 15px;
       text-align: center;
     }
-    main {
-      padding: 2rem;
+
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    form input, form button {
-      padding: 0.5rem;
-      margin: 0.3rem;
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
     }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
     button {
-      background: #4a90e2;
+      background: #3498db;
       color: white;
       border: none;
       cursor: pointer;
+      transition: 0.3s;
     }
+
     button:hover {
-      background: #357ab8;
+      background: #2980b9;
     }
-    #books {
-      list-style: none;
-      padding: 0;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
     }
-    #books li {
-      background: white;
-      margin: 0.5rem 0;
-      padding: 1rem;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 Book Management System</h1>
+  </header>
+
+  <div class="container">
+    <h2>Add Book</h2>
+    <form id="bookForm">
+      <label for="user">User Name:</label>
+      <input type="text" id="user" name="user" required>
+
+      <label for="book">Book Name:</label>
+      <input type="text" id="book" name="book" required>
+
+      <label for="category">Category:</label>
+      <select id="category" name="category" required>
+        <option value="">--Select Category--</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Non-Fiction">Non-Fiction</option>
+        <option value="Science">Science</option>
+        <option value="History">History</option>
+      </select>
+
+      <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Book Records</h2>
+    <table id="bookTable">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Book Name</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Records will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('bookForm');
+    const tableBody = document.querySelector('#bookTable tbody');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const user = document.getElementById('user').value;
+      const book = document.getElementById('book').value;
+      const category = document.getElementById('category').value;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${user}</td><td>${book}</td><td>${category}</td>`;
+      tableBody.appendChild(row);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
